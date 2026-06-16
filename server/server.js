@@ -1,15 +1,17 @@
 import express from 'express';
 import dotenv from 'dotenv';
-
-
+import URLRouter from './router/routerURl.js';
+import connectDB from './config/db_config.js';
+dotenv.config();
 const app = express();
 
 app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-    res.send("URL Shortener project");
-});
+app.use('/api', URLRouter);
+
+connectDB();
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
